@@ -21,6 +21,7 @@ function createSnake(){//função responsavel por criar a cobrinha
     }
 }
 
+
 function starGame(){//função que da inicio ao jogo
     criaBG();//chama a função responsavel por criar o backgound
     createSnake();//chama a função responsavel por criar a cobrinha
@@ -32,6 +33,16 @@ function starGame(){//função que da inicio ao jogo
     if(direction == "left") snakeX -= box;
     if(direction == "up") snakey -= box;
     if(direction == "down") snakey += box;
+
+    snake.pop();//retira o ultimo elemento do array
+
+    let newHead = {//seta a cabeça da cobrinha
+        x: snakeX,
+        y: snakey
+    }
+    //18:44
+
+    snake.unshift(newHead);//insere no começo do array
 
 }
 
