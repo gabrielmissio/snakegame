@@ -12,6 +12,7 @@ let direction = "right";
 function criaBG(){//função responsavel por reenderizar o background
     context.fillStyle = "lightgreen";//definindo a cor do background
     context.fillRect(0, 0, 16 * box, 16 * box );//definindo o tamanho do background
+   
 }
 
 function createSnake(){//função responsavel por criar a cobrinha
@@ -21,8 +22,28 @@ function createSnake(){//função responsavel por criar a cobrinha
     }
 }
 
+document.addEventListener('keydown', update);
+
+function update (event){
+    if(event.keyCode == 37 && direction != "right") direction = "left";
+    if(event.keyCode == 38 && direction != "down") direction = "up";
+    if(event.keyCode == 39 && direction != "left") direction = "right";
+    if(event.keyCode == 40 && direction != "up") direction = "down";
+
+}
+
+function checkHeadPosition(){
+    if(snake[0].x > 15 * box && direction != "left") snake[0].x = 0;
+    if(snake[0].x < 0 && direction != "right") snake[0].x = 16 * box;
+    if(snake[0].y > 15 * box && direction != "up") snake[0].y = 0;
+    if(snake[0].y < 0 && direction != "down") snake[0].y = 16 * box;
+
+
+}
 
 function starGame(){//função que da inicio ao jogo
+
+    checkHeadPosition();
     criaBG();//chama a função responsavel por criar o backgound
     createSnake();//chama a função responsavel por criar a cobrinha
 
@@ -40,7 +61,7 @@ function starGame(){//função que da inicio ao jogo
         x: snakeX,
         y: snakey
     }
-    //18:44
+    
 
     snake.unshift(newHead);//insere no começo do array
 
