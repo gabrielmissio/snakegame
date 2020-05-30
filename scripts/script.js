@@ -66,6 +66,13 @@ function starGame(){//função que da inicio ao jogo
     if(direction == "up") snakey -= box;
     if(direction == "down") snakey += box;
 
+    for(i = 1; i < snake.length; i++){
+        if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            clearInterval(jogo);
+            alert("GAME OVER");
+        }
+    }
+
     if(snakeX != food.x || snakey != food.y){
         snake.pop();//retira o ultimo elemento do array
     }else{
