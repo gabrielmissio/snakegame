@@ -7,6 +7,11 @@ snake[0] = {
     y: 7 * box//seta a posição da cobrinha no eixo y
 }
 
+let food = {
+    x: Math.floor(Math.random() * 15 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 1) * box
+}
+
 let direction = "right";
 
 function criaBG(){//função responsavel por reenderizar o background
@@ -41,11 +46,17 @@ function checkHeadPosition(){
 
 }
 
+function drawFood(){
+    context.fillStyle = "red";
+    context.fillRect(food.x, food.y, box, box);
+}
+
 function starGame(){//função que da inicio ao jogo
 
     checkHeadPosition();
     criaBG();//chama a função responsavel por criar o backgound
     createSnake();//chama a função responsavel por criar a cobrinha
+    drawFood();
 
     let snakeX = snake[0].x;
     let snakey = snake[0].y;
@@ -55,8 +66,14 @@ function starGame(){//função que da inicio ao jogo
     if(direction == "up") snakey -= box;
     if(direction == "down") snakey += box;
 
-    snake.pop();//retira o ultimo elemento do array
+    if(snakeX != food.x || snakey != food.y){
+        snake.pop();//retira o ultimo elemento do array
+    }else{
+        food.x = Math.floor(Math.random() * 15 + 1) * box;
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+    }
 
+    
     let newHead = {//seta a cabeça da cobrinha
         x: snakeX,
         y: snakey
